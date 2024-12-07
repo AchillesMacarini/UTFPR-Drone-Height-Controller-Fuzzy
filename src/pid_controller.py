@@ -31,9 +31,7 @@ def simulate_takeOff(mass, kf,rotorInitialVelocityRPM,targetHeight,steps,pid = F
             integralError += error*timeStep
             derivativeError = (error - previousError)/timeStep
             pid_output = kp* error + ki * integralError + kd * derivativeError
-            print(pid_output)
-        
-        
+            previousError = error
         
         
         a = (4 / mass) * (kf * rotorVelocity[i] ** 2) - g
@@ -41,6 +39,7 @@ def simulate_takeOff(mass, kf,rotorInitialVelocityRPM,targetHeight,steps,pid = F
         verticalVelocity[i + 1] = verticalVelocity[i] + a * timeStep
         verticalPosition[i + 1] = verticalPosition[i] + verticalVelocity[i] * timeStep
         rotorVelocity[i + 1] = rotorVelocity[i] + pid_output
+        print(rotorVelocity[i + 1])
         rotorVelocityRPM[i + 1] = rotorVelocity[i + 1] * 60 / (2 * math.pi)
 
     return verticalPosition, verticalAcceleration, rotorVelocity, rotorVelocityRPM
@@ -67,7 +66,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-vp, va, rv, rvRPM = simulate_takeOff(mass = droneMass, kf = kf, rotorInitialVelocityRPM=2310,steps=steps,targetHeight=500,pid=True,kp = 0.5, ki = 0.1, kd = 0.05)
+vp, va, rv, rvRPM = simulate_takeOff(mass = droneMass, kf = kf, rotorInitialVelocityRPM=2310,steps=steps,targetHeight=50,pid=True,kp = 0.8, ki = 0.2, kd = 0.1)
 
 plt.figure(figsize=(12, 6))
 plt.subplot(2, 1, 1)
