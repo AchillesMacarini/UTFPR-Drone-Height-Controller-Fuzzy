@@ -41,6 +41,9 @@ plt.show()
 
 plt.figure(figsize=(10, 10))
 
+# print(fuzzy.measured_speeds)
+# print(fuzzy.control_signals)
+
 plt.subplot(2, 1, 1)
 plt.plot(fuzzy.iterations, fuzzy.measured_speeds, label="Measured Speed")
 plt.axhline(y=100, color='r', linestyle='--', label="Setpoint")

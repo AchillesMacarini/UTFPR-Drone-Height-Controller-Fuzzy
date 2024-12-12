@@ -24,8 +24,6 @@ class fuzzy_controller:
         engine.input['Speed'] = speed
 
         engine.compute()
-
-        print(engine.output['Voltage'])
         # fuzzy.voltage.view(sim=engine)
 
         return engine.output['Voltage']
