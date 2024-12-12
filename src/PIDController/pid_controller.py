@@ -4,7 +4,7 @@ import Motor.Models.Motor as Motor
 kp = 1.5
 ki = 0.5
 kd = 0.2
-setpoint = 100
+setpoint = 30
 
 pid = pidModel.PID(kp, ki, kd, setpoint)
 motor = Motor.Motor()
