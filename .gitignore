@@ -1,1 +1,4 @@
-*\__pycache__\*
+__pycache__/*
+src/PIDController/Models/__pycache__/*
+src/PIDController/__pycache__/*
+src/Motor/Models/__pycache__/*

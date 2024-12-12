@@ -1,5 +1,5 @@
 import PIDController.Models.PID as pidModel
-import PIDController.Models.Motor as Motor
+import Motor.Models.Motor as Motor
 
 kp = 1.5
 ki = 0.5
