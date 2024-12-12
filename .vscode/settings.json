@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./src/FuzzyController/Models",
+        "./src/FuzzyController"
+    ]
+}

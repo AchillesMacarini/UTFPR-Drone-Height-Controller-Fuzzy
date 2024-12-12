@@ -2,3 +2,6 @@ __pycache__/*
 src/PIDController/Models/__pycache__/*
 src/PIDController/__pycache__/*
 src/Motor/Models/__pycache__/*
+src/FuzzyController/__pycache__/*
+src/FuzzyController/Models/__pycache__/*
+src/FuzzyController/Models/__pycache__/*
