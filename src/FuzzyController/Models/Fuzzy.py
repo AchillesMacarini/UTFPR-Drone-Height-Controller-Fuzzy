@@ -14,23 +14,25 @@ class Fuzzy:
     error['NEGATIVO'] =  fuzz.trimf(error.universe, [-100,-100, 0])
     error['ZERO'] =  fuzz.trimf(error.universe, [-50,0,50])
     error['POSITIVO'] =  fuzz.trimf(error.universe, [0,100, 100])
-    voltage['diminuir'] = fuzz.trimf(voltage.universe, [0,0, 125])
+    voltage['diminuir'] = fuzz.trimf(voltage.universe, [0,0, 152])
     voltage['manter'] = fuzz.trapmf(voltage.universe, [50,100,150, 200])
-    voltage['aumentar'] = fuzz.trimf(voltage.universe, [125,250, 250])
+    voltage['aumentar'] = fuzz.trimf(voltage.universe, [143,250, 250])
     
     def __init__(self, setpoint):
         self.setpoint = setpoint
         self.rules = Fuzzy.createRules()
 
     def createRules():
-        rule1 = ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['aumentar'])
-        rule2 = ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['ZERO'], Fuzzy.voltage['aumentar'])
-        rule3 = ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['manter'])
-        rule4 = ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['manter'])
-        rule5 = ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['ZERO'], Fuzzy.voltage['diminuir'])
-        rule6 = ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['diminuir'])
-        rule7 = ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['manter'])
-        rule8 = ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['ZERO'], Fuzzy.voltage['manter'])
-        rule9 = ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['manter'])
+        rules = [
+            ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['aumentar']),
+            ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['ZERO'], Fuzzy.voltage['aumentar']),
+            ctrl.Rule(Fuzzy.speed['low'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['manter']),
+            ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['manter']),
+            ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['ZERO'], Fuzzy.voltage['diminuir']),
+            ctrl.Rule(Fuzzy.speed['high'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['diminuir']),
+            ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['NEGATIVO'], Fuzzy.voltage['aumentar']),
+            ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['ZERO'], Fuzzy.voltage['manter']),
+            ctrl.Rule(Fuzzy.speed['medium'] & Fuzzy.error['POSITIVO'], Fuzzy.voltage['diminuir'])
+        ]
 
-        return [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9]
+        return rules
